@@ -1,3 +1,65 @@
-<h1>
-  {{title}}
-</h1>
+
+<div class="container-fluid">
+<h2>Test App</h2>
+<h6>
+  A simple test application that load update and delete data using Rest API<br>
+  REST Api server is running at http://localhost:3000/ <br>
+  Mongo DB server must be running as well. 
+</h6>
+<div style="color:grey">
+    <h3>These are your Places</h3>
+    <ul>
+      <li *ngFor="let p of places" 
+        (click)="onSelect(p)"  
+        style="color:teal">
+        <span title="({{p.latitude}}, {{p.longitude}})">{{p.name}} - {{p.address}} </span>
+      </li>
+    </ul>
+</div>
+<div class="panel panel-default" *ngIf="selectedPlace">
+  <h4>You selected following place</h4>
+  <table>
+    <tr>
+      <td>DB ID : </td>
+      <td>{{selectedPlace._id}}</td>
+    </tr>
+    <tr>
+      <td>Name : </td>
+      <td>{{selectedPlace.name}}</td>
+    </tr>
+    <tr>
+      <td>Address : </td>
+      <td>{{selectedPlace.address}}</td>
+    </tr>
+    <tr>
+      <td>Geo Location : </td>
+      <td>({{selectedPlace.latitude}}, {{selectedPlace.longitude}})</td>
+    </tr>
+  </table>
+  <br>
+  <button class="btn btn-danger" (click)="deletePlace()">Delete Selected Place</button>
+</div>
+<div class="panel panel-default">
+    <h4>Provide following values to add a new place</h4>
+    <table>
+    <tr><td>
+    <label>Name: </label></td><td>
+    <input [(ngModel)]="myNewPlace.name" placeholder="name"/>
+    </td></tr>
+    <tr><td>
+    <label>Address: </label></td><td>
+    <input [(ngModel)]="myNewPlace.address" placeholder="address"/>
+    </td></tr>
+    <tr><td>
+    <label>Lat: </label></td><td>
+    <input [(ngModel)]="myNewPlace.latitude" placeholder="latitude"/>
+    </td></tr>
+    <tr><td>
+    <label>Lon: </label></td><td>
+    <input [(ngModel)]="myNewPlace.longitude" placeholder="longitude"/>
+    </td></tr>
+    </table>
+    <br>
+    <button class="btn btn-primary" (click)="addNewPlace()">Add New Place</button><br>
+</div>
+</div>
